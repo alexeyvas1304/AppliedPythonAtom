@@ -14,6 +14,7 @@ def is_utf8(f_name):
 def is_cp1251(f_name):
     try:
         with open(f_name, encoding='cp1251') as f:
+
             f.read()
     except Exception:
         return False

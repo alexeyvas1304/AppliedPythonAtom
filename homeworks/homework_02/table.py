@@ -20,9 +20,4 @@ if __name__ == '__main__':
     else:
         encode = define_encoding(filename)
         formats = define_format(filename, encode)
-        with open(filename, encoding=encode) as f:  # это костыль
-            st = f.read()
-        if st == '[]\n':
-            print('Формат не валиден')
-        else:
-            print_table(filename, encode, formats)
+        print_table(filename, encode, formats)
