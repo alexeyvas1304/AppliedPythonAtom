@@ -35,7 +35,6 @@ def print_table(file, encode, formats):
         print('Формат не валиден')
         return None
 
-
     lst_maxlen = []
     if rows == 1:
         for word in lst[0]:

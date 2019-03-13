@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 def is_utf8(f_name):
     try:
         with open(f_name, encoding='utf8') as f:
