@@ -23,4 +23,15 @@ def groupping_anagramms(words):
     :return: list of lists of words
     """
     # TODO: реализовать функцию
-    raise NotImplementedError
+
+    d = {}
+    for st in words:
+        if tuple(sorted(st.lower())) in d:
+            d[tuple(sorted(st.lower()))].append(st)
+        else:
+            d[tuple(sorted(st.lower()))] = [st]
+
+    ls = []
+    for k in d:
+        ls.append(d[k])
+    return ls
