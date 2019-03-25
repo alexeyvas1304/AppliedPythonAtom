@@ -1,8 +1,18 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from multiprocessing import Process, Manager
 import os
+from multiprocessing import Pool, Manager
+
+result_dict = Manager().dict()
+
+
+def counter(full_path):
+    cnt = 0
+    with open(full_path, 'r') as f:
+        for line in f.readlines():
+            cnt += len(line.split())
+    result_dict[full_path.split('/')[-1]] = cnt
 
 
 def word_count_inference(path_to_dir):
@@ -16,4 +26,9 @@ def word_count_inference(path_to_dir):
     :return: словарь, где ключ - имя файла, значение - число слов +
         специальный ключ "total" для суммы слов во всех файлах
     '''
-    raise NotImplementedError
+
+    lst = map(lambda path_file: path_to_dir + '/' + path_file, os.listdir(path=path_to_dir))
+    with Pool(3) as p:
+        p.map(counter, lst)
+    result_dict['total'] = sum(result_dict.values())
+    return result_dict
