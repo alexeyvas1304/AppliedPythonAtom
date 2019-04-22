@@ -6,12 +6,8 @@ import numpy as np
 
 
 def check(y_true, y_hat):
-    if type(y_true) != np.ndarray or type(y_hat) != np.ndarray:
-        print('invalid data')
-        return False
     if y_true.shape[0] != y_hat.shape[0]:
-        print('bad size')
-        return False
+        raise ValueError
     return True
 
 
@@ -45,6 +41,6 @@ def r2_score(y_true, y_hat):
     :return: loss
     """
     if check(y_true, y_hat):
-        ssres = sum((y_true - y_hat) ** 2)
-        sstot = sum((y_true - np.mean(y_true)) ** 2)
-        return 1 - SSres / SStot
+        ss_res = sum((y_true - y_hat) ** 2)
+        ss_tot = sum((y_true - np.mean(y_true)) ** 2)
+        return 1 - ss_res / ss_tot
