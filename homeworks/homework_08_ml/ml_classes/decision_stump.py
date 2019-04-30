@@ -30,8 +30,8 @@ class DecisionStumpRegressor:
         for i in range(len(X) - 1):
             y_left = y[:i + 1]
             y_right = y[i + 1:]
-            prirost = mse_full - (len(y_left) * np.sum((y_left - np.mean(y_left)) ** 2) + len(y_right) * np.sum(
-                (y_right - np.mean(y_right)) ** 2)) / len(y)
+            prirost = mse_full - (
+                        np.sum((y_left - np.mean(y_left)) ** 2) + np.sum((y_right - np.mean(y_right)) ** 2)) / len(y)
             prirost_lst.append(prirost)
         idx = np.argmax(np.array(prirost_lst))
         self.th = (X[idx] + X[idx + 1]) / 2
